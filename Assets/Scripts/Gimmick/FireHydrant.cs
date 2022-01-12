@@ -24,6 +24,15 @@ public class FireHydrant : MonoBehaviour
         Direction.Right
     };
 
+    private void Start()
+    {
+        bool clearGimmick = SaveManager.instance.GetGimmickFlag(SaveManager.Flag.OpenedFireHydrant);
+        if (clearGimmick)
+        {
+            openObj.SetActive(true);
+        }
+    }
+
     // “ü—Í
     public void OnButton(int type)
     {
@@ -76,6 +85,7 @@ public class FireHydrant : MonoBehaviour
 
     void Clear()
     {
+        SaveManager.instance.SetGimmickFlag(SaveManager.Flag.OpenedFireHydrant);
         Debug.Log("ƒNƒŠƒA");
         openObj.SetActive(true);
     }

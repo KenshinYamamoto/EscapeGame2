@@ -7,13 +7,22 @@ public class Elevator : MonoBehaviour
     public GameObject leftObj;
     public GameObject rightObj;
 
-    // カードを持っていれば開く
+    private void Start()
+    {
+        bool clearGimmick = SaveManager.instance.GetGimmickFlag(SaveManager.Flag.OpenedElevator);
+        if (clearGimmick)
+        {
+            Open();
+        }
+    }
 
+    // カードを持っていれば開く
     public void OnThis()
     {
         bool hasCard = ItemBox.instance.CanUseItem(ItemManager.Item.Card);
         if (hasCard)
         {
+            SaveManager.instance.SetGimmickFlag(SaveManager.Flag.OpenedElevator);
             Open();
             ItemBox.instance.UseItem(ItemManager.Item.Card);
         }

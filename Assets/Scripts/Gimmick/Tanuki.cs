@@ -8,14 +8,30 @@ public class Tanuki : MonoBehaviour
 
     public bool moved = false;
 
+    private void Start()
+    {
+        // 既にクリアしているならロッカーを開ける
+        bool clearGimmick = SaveManager.instance.GetGimmickFlag(SaveManager.Flag.MovedTanuki);
+        if (clearGimmick)
+        {
+            Move();
+        }
+    }
+
     public void OnThis()
     {
         bool hasLeaf = ItemBox.instance.CanUseItem(ItemManager.Item.Leaf); // TODO：アイテムBoxの実装、アイテムの実装
         if (hasLeaf)
         {
-            gameObject.SetActive(false);
+            Move();
             ItemBox.instance.UseItem(ItemManager.Item.Leaf);
-            moved = true;
         }
+    }
+
+    void Move()
+    {
+        moved = true;
+        SaveManager.instance.SetGimmickFlag(SaveManager.Flag.MovedTanuki);
+        gameObject.SetActive(false);
     }
 }

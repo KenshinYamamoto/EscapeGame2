@@ -10,17 +10,33 @@ public class TeaServer : MonoBehaviour
 
     public Tanuki tanuki;
 
+    // Šù‚É“®‚©‚µ‚Ä‚¢‚½‚çÁ‚·
+    private void Start()
+    {
+        bool clearGimmick = SaveManager.instance.GetGimmickFlag(SaveManager.Flag.MovedTeaServer);
+        if (clearGimmick)
+        {
+            Move();
+        }
+    }
+
     public void OnThis()
     {
         bool movedTanuki = tanuki.moved;
         if (movedTanuki)
         {
-            // Á‚¦‚é
-            gameObject.SetActive(false);
+            SaveManager.instance.SetGimmickFlag(SaveManager.Flag.MovedTeaServer);
+            Move();
         }
         else
         {
             Debug.Log("‚½‚Ê‚«‚ª×–‚‚¾");
         }
+    }
+
+    void Move()
+    {
+        // Á‚¦‚é
+        gameObject.SetActive(false);
     }
 }

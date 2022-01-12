@@ -9,11 +9,21 @@ public class Locker : MonoBehaviour
 
     public GameObject openObj;
 
+    private void Start()
+    {
+        bool clearGimmick = SaveManager.instance.GetGimmickFlag(SaveManager.Flag.OpenedLocker);
+        if (clearGimmick)
+        {
+            Open();
+        }
+    }
+
     public void OnThis()
     {
         bool hasKey = ItemBox.instance.CanUseItem(ItemManager.Item.Key);
         if (hasKey)
         {
+            SaveManager.instance.SetGimmickFlag(SaveManager.Flag.OpenedLocker);
             Open();
             ItemBox.instance.UseItem(ItemManager.Item.Key); // Œ®‚ðŽg—p‚·‚é
         }

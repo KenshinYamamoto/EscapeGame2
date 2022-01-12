@@ -22,12 +22,15 @@ public class ItemBox : MonoBehaviour
         {
             boxes[i].SetActive(false);
         }
+
+        // セーブデータがあると表示する
     }
 
     public void SetItem(ItemManager.Item item)
     {
         int index = (int)item;
         boxes[index].SetActive(true);
+        SaveManager.instance.SetGetItemFlag(item);
     }
 
     public bool CanUseItem(ItemManager.Item item)
@@ -44,5 +47,6 @@ public class ItemBox : MonoBehaviour
     {
         int index = (int)item;
         boxes[index].SetActive(false);
+        SaveManager.instance.SetUseItemFlag(item);
     }
 }
