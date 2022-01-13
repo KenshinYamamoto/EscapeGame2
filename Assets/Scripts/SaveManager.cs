@@ -41,7 +41,7 @@ public class SaveManager : MonoBehaviour
 
     // PlayerPrefs‚Å•¶Žš—ñ‚ðŽæ“¾
     // json•¶Žš—ñ‚ðƒNƒ‰ƒX‚É•ÏŠ·
-    void Load()
+    public void Load()
     {
         saveData = new SavaData();
         if (PlayerPrefs.HasKey(SAVE_KEY))
@@ -49,6 +49,17 @@ public class SaveManager : MonoBehaviour
             string json = PlayerPrefs.GetString(SAVE_KEY);
             saveData = JsonUtility.FromJson<SavaData>(json);
         }
+    }
+
+    public void CreateNewData()
+    {
+        PlayerPrefs.DeleteKey(SAVE_KEY);
+        saveData = new SavaData();
+    }
+
+    public bool HasSaveData()
+    {
+        return PlayerPrefs.HasKey(SAVE_KEY);
     }
 
     public void SetGetItemFlag(ItemManager.Item item)

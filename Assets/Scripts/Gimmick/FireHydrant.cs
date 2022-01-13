@@ -47,7 +47,6 @@ public class FireHydrant : MonoBehaviour
                 userInputs.Add(Direction.Right);
                 break;
         }
-        Debug.Log(type);
         // ユーザーの入力を代入
         // 5回入力されたらチェックする
         if(userInputs.Count == 5)
@@ -66,8 +65,8 @@ public class FireHydrant : MonoBehaviour
 
     void ResetInput()
     {
+        MessageManager.instance.ShowMessage("入力が間違っているようだ");
         userInputs.Clear();
-        Debug.Log("リセット");
     }
 
     // 一致しているかチェック
@@ -85,8 +84,9 @@ public class FireHydrant : MonoBehaviour
 
     void Clear()
     {
+        SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
         SaveManager.instance.SetGimmickFlag(SaveManager.Flag.OpenedFireHydrant);
-        Debug.Log("クリア");
+        MessageManager.instance.ShowMessage("消火栓の扉が開いた");
         openObj.SetActive(true);
     }
 }

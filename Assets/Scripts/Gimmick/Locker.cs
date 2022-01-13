@@ -21,15 +21,22 @@ public class Locker : MonoBehaviour
     public void OnThis()
     {
         bool hasKey = ItemBox.instance.CanUseItem(ItemManager.Item.Key);
+        bool useKey = SaveManager.instance.GetUseItemFlag(ItemManager.Item.Key);
         if (hasKey)
         {
+            SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
+            MessageManager.instance.ShowMessage("金庫が開いた");
             SaveManager.instance.SetGimmickFlag(SaveManager.Flag.OpenedLocker);
             Open();
             ItemBox.instance.UseItem(ItemManager.Item.Key); // 鍵を使用する
         }
+        else if (useKey)
+        {
+            MessageManager.instance.ShowMessage("金庫は既に開いている");
+        }
         else
         {
-            Debug.Log("鍵がかかっている");
+            MessageManager.instance.ShowMessage("金庫に鍵がかかっている");
         }
     }
 

@@ -42,12 +42,14 @@ public class TeaServer : MonoBehaviour
         }
         else
         {
-            Debug.Log("‚½‚Ê‚«‚ªŽ×–‚‚¾");
+            MessageManager.instance.ShowMessage("‚½‚Ê‚«‚ªŽ×–‚‚¾");
         }
     }
 
     void Move()
     {
+        SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
+        MessageManager.instance.ShowMessage("‹‹’ƒ‹@‚ª“®‚¢‚½");
         moved = true;
         anim.Play();
     }

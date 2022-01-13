@@ -37,10 +37,16 @@ public class Elevator : MonoBehaviour
             Open();
             ItemBox.instance.UseItem(ItemManager.Item.Card);
         }
+        else
+        {
+            MessageManager.instance.ShowMessage("エレベーターキーが必要だ");
+        }
     }
 
     void Open()
     {
+        SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
+        MessageManager.instance.ShowMessage("エレベーターが開いた");
         moved = true;
         anim.Play();
     }

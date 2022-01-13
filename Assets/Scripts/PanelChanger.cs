@@ -23,7 +23,7 @@ public class PanelChanger : MonoBehaviour
 
     private void Start()
     {
-        ShowPanel(Panel.Panel0);
+        Init();
     }
 
     Panel currentPanel;
@@ -115,8 +115,19 @@ public class PanelChanger : MonoBehaviour
         ShowPanel(Panel.Panel2);
     }
 
+    void Init()
+    {
+        HideArrows();
+        MessageManager.instance.HidePanel();
+        currentPanel = Panel.Panel0;
+        rightArrow.SetActive(true);
+        transform.localPosition = new Vector2(0, 0);
+    }
+
     void ShowPanel(Panel panel)
     {
+        MessageManager.instance.HidePanel();
+        SoundManager.instance.PlaySE(SoundManager.SE.OnButton);
         HideArrows();
         currentPanel = panel;
         switch (panel)

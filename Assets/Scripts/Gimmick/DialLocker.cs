@@ -71,8 +71,9 @@ public class DialLocker : MonoBehaviour
 
     void Clear()
     {
+        SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
         // ロッカーを開けたい
-        Debug.Log("ロッカーが開いた");
+        MessageManager.instance.ShowMessage("ロッカーが開いた");
         ClearEvent.Invoke();
     }
 }

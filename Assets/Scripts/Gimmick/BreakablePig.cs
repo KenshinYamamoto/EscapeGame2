@@ -24,13 +24,15 @@ public class BreakablePig : MonoBehaviour
         bool hasHammer = ItemBox.instance.CanUseItem(ItemManager.Item.Hammer);
         if (hasHammer)
         {
+            SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
+            MessageManager.instance.ShowMessage("’™‹à” ‚ªŠ„‚ê‚½");
             SaveManager.instance.SetGimmickFlag(SaveManager.Flag.BrokenPig);
             Break();
             ItemBox.instance.UseItem(ItemManager.Item.Hammer); // Œ®‚ðŽg—p‚·‚é
         }
         else
         {
-            Debug.Log("‰ó‚¹‚»‚¤‚¾");
+            MessageManager.instance.ShowMessage("‰ó‚¹‚»‚¤‚¾");
         }
     }
 

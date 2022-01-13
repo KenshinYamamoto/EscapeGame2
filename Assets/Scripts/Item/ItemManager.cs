@@ -36,6 +36,26 @@ public class ItemManager : MonoBehaviour
     public void OnThis()
     {
         SetToItemBox();
+        MessageManager.instance.ShowMessage(GetItemName(item) + "を手に入れた");
+        SoundManager.instance.PlaySE(SoundManager.SE.GetItem);
+    }
+
+    string GetItemName(Item item)
+    {
+        switch (item)
+        {
+            case Item.Leaf:
+                return "葉";
+            case Item.Key:
+                return "金庫の鍵";
+            case Item.Card:
+                return "エレベーターキー";
+            case Item.Hammer:
+                return "ハンマー";
+            case Item.Paper:
+                return "焦げた紙";
+        }
+        return "";
     }
 
     void SetToItemBox()

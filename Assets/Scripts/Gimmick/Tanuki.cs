@@ -23,8 +23,14 @@ public class Tanuki : MonoBehaviour
         bool hasLeaf = ItemBox.instance.CanUseItem(ItemManager.Item.Leaf); // TODO：アイテムBoxの実装、アイテムの実装
         if (hasLeaf)
         {
+            SoundManager.instance.PlaySE(SoundManager.SE.GimmickClear);
             Move();
+            MessageManager.instance.ShowMessage("たぬきが消えていった");
             ItemBox.instance.UseItem(ItemManager.Item.Leaf);
+        }
+        else
+        {
+            MessageManager.instance.ShowMessage("たぬきは葉で消えるらしい");
         }
     }
 
